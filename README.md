@@ -1,2 +1,5 @@
 # EveryPenny
-CS490
+# CS490
+# Jihadul Islam
+# Aron
+# Nathan
