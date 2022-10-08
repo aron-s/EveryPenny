@@ -1,5 +1,5 @@
 #!/bin/bash
-KEY_PAIR=tutorial-cluster
+KEY_PAIR=CS490-cluster
     ecs-cli up \
       --keypair $KEY_PAIR  \
       --capability-iam \

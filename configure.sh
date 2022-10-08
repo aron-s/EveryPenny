@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
-PROFILE_NAME=tutorial
-CLUSTER_NAME=tutorial-cluster
+PROFILE_NAME=CS490
+CLUSTER_NAME=CS490-cluster
 REGION=us-east-1
 LAUNCH_TYPE=EC2
 ecs-cli configure profile --profile-name "$PROFILE_NAME" --access-key "$AWS_ACCESS_KEY_ID" --secret-key "$AWS_SECRET_ACCESS_KEY"
