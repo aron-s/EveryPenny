@@ -1,10 +1,10 @@
 #!/bin/bash
-KEY_PAIR=CS490-cluster
+KEY_PAIR=everypenny-cluster
     ecs-cli up \
       --keypair $KEY_PAIR  \
       --capability-iam \
-      --size 2 \
+      --size 1 \
       --instance-type t2.micro \
-      --tags project=CS490-cluster,owner=jihadul \
-      --cluster-config tutorial \
-      --ecs-profile tutorial
+      --tags project=everypenny-cluster,owner=CS490 \
+      --cluster-config everypenny \
+      --ecs-profile everypenny
