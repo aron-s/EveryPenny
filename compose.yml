@@ -1,6 +1,0 @@
-version: "3"
-services:
-  frontend:
-    image: "as4259/everypenny-frontend"
-    ports:
-      - "80:80"
