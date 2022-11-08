@@ -3,17 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Route, BrowserRouter} from 'react-router-dom'
+import {Route, Routes, BrowserRouter} from 'react-router-dom'
 import Login from './components/Login'
-import {CookiesProvidor} from 'react-cookie'
+import {CookiesProvider} from 'react-cookie'
 
 function Router() {
   return (
-    <CookiesProvidor>
+    <CookiesProvider>
       <BrowserRouter>
-        <Route exact path="/" component = {Login}/>
+      <Routes>
+        <Route exact path="/" element={<Login />}/>
+      </Routes>
       </BrowserRouter>
-    </CookiesProvidor>
+    </CookiesProvider>
   )
 }
 

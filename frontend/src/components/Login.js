@@ -7,25 +7,34 @@ function Login() {
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [token, setToken] = useCookies(['mytoken'])
+    const [isLogin, setLogin] = useState(true)
 
     let navigate = useNavigate()
-    const [token, setToken] = useCookies(['mytoken'])
 
     useEffect(() => {
         if(token['mytoken']) {
             alert('success!')
+            // navigate(/budget)
         }
     })
 
     const loginBtn = () => {
         APIService.LoginUser({username, password})
+        .then(resp => setToken('mytoken', resp.token))
+        .catch(error => console.log(error))
+    }
+
+    const registerBtn = () => {
+        APIService.RegisterUser({username, password})
+        .then(() => loginBtn)
         .catch(error => console.log(error))
     }
 
     return (
         <div>
-            <h1>Please login</h1>
-            <button onClick={loginBtn}>Login</button>
+            <h1>Please {isLogin ? "Login" : "Register"}</h1>
+            
             <div>
                 <label htmlFor="username" className="form-label">Username</label>
                 <input type="text" className="form-control" id="username" placeholder="username"
@@ -35,6 +44,16 @@ function Login() {
                 <label htmlFor="password" className="form-label">Password</label>
                 <input type="password" className="form-control" id="password" placeholder="password"
                 value = {password} onChange = { e => setPassword(e.target.value)}/>
+            </div> 
+            {isLogin? <button onClick={loginBtn}>Login</button>
+            : <button onClick={registerBtn}>Register</button>
+            }
+
+            <br/>
+            <div>
+                {isLogin? <h5>If you dont have account, please <button onClick={() => setLogin(false)}>Register</button> here</h5>
+                : <h5>If you have account, please <button onClick={() => setLogin(true)}>Login</button> here</h5>
+                }
             </div> 
         </div>
     )
