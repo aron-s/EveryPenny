@@ -17,7 +17,7 @@ from rest_framework import permissions
 @permission_classes([IsAuthenticated])
 def myprofile(request):
     content = {
-        'status': 'Permitted'
+        'status': 'Successfully Logged In!'
     }
     return Response(content)
 

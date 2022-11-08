@@ -14,8 +14,7 @@ function Login() {
 
     useEffect(() => {
         if(token['mytoken']) {
-            alert('success!')
-            // navigate(/budget)
+            navigate('/MyProfile')
         }
     })
 

@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import {Route, Routes, BrowserRouter} from 'react-router-dom'
 import Login from './components/Login'
 import {CookiesProvider} from 'react-cookie'
+import MyProfile from './components/MyProfile';
 
 function Router() {
   return (
@@ -13,6 +14,7 @@ function Router() {
       <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Login />}/>
+        <Route exact path="/myprofile" element={<MyProfile />}/>
       </Routes>
       </BrowserRouter>
     </CookiesProvider>

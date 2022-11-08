@@ -20,4 +20,16 @@ export default class APIService {
             
         }).then(resp => resp.json())
     }
+
+    static GetMyProfileInfo(body, token) {
+        return fetch('http://127.0.0.1:8000/api/myprofile/', {
+            'method': 'GET', 
+            headers : {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token['mytoken']}`
+            },
+            body: JSON.stringify(body)
+            
+        }).then(resp => resp.json())
+    }
 }
