@@ -31,8 +31,8 @@ def validate(request):
             return Response({'error': 'email already exists!'})
         except User.DoesNotExist:
             content = {
-                'email2': username,
-                'password2': password
+                'email2': validateEmail(username),
+                'password2': validatePassword(password)
             }
 
         return Response(content)

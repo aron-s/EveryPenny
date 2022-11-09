@@ -19,7 +19,7 @@ function Login() {
     }, [token])
 
     const loginBtn = () => {
-        let validationFailed = true
+        let validationFailed = false
         APIService.ValidateCredentials({username}, {password})
         .then(resp => {
             console.log(resp)
