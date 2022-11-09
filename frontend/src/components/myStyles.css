@@ -1,0 +1,47 @@
+.welcome{
+    text-align: center;
+}
+.logo{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 35%;
+}
+.reqlog{
+    text-align: center;
+}
+.form-control{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+.logbtn{
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    
+    cursor: pointer;
+    width: 100%;
+}
+
+.logredir{
+    background-color: #008CBA;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    
+    cursor: pointer;
+    width: 100%;
+}
+
+.myprof{
+    text-align: center;
+}
+.status{
+    text-align: center;
+}

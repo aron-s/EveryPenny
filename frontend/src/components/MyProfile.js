@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import APIService from '../APIService';
 import {useCookies} from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
+import './myStyles.css';
+import logo from './images/everypennylogo.png';
 
 function MyProfile() {
 
@@ -24,9 +26,10 @@ function MyProfile() {
 
     return (
         <div>
-           <h1>My profile</h1>
-           <h2>Status: Logged in</h2>
-           <button onClick={logoutBtn}>Logout</button>
+           <h1 className='myprof'>My profile</h1> 
+           <h2 className='status'>Status: Logged in</h2>
+           <img className = 'logo'src={logo} alt="logo"/>
+           <button className = 'logredir' onClick={logoutBtn}>Logout</button>
         </div>
     )
 }

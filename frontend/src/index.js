@@ -7,13 +7,18 @@ import {Route, Routes, BrowserRouter} from 'react-router-dom'
 import Login from './components/Login'
 import {CookiesProvider} from 'react-cookie'
 import MyProfile from './components/MyProfile';
+import './components/Login'
+import './components/MyProfile'
+
 
 function Router() {
   return (
+    
     <CookiesProvider>
       <BrowserRouter>
       <Routes>
         <Route exact path="/" element={<Login />}/>
+        
         <Route exact path="/myprofile" element={<MyProfile />}/>
       </Routes>
       </BrowserRouter>

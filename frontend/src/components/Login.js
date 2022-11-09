@@ -2,6 +2,9 @@ import React, {useState, useEffect} from 'react';
 import APIService from '../APIService';
 import {useCookies} from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
+import './myStyles.css';
+import logo from './images/everypennylogo.png';
+
 
 function Login() {
 
@@ -53,6 +56,7 @@ function Login() {
             .catch(error => console.log(error))    
         }
     }
+    
 
     const registerBtn = () => {
         APIService.RegisterUser({username, password})
@@ -65,26 +69,27 @@ function Login() {
 
     return (
         <div>
-            <h1>Please {isLogin ? "Login" : "Register"}</h1>
+            <h1 className='welcome'>Welcome to Every Penny!</h1>
+            <img className = 'logo'src={logo} alt="logo"/>
+            <h2 className = 'reqlog'>Please {isLogin ? "Login" : "Register"}</h2>
+            
             
             <div>
-                <label htmlFor="username" className="form-label">Username</label>
+                <label htmlFor="username" className="form-label"></label>
                 <input type="text" className="form-control" id="username" placeholder="username"
                 value = {username} onChange = { e => setUsername(e.target.value)}/>
             </div>
             <div>
-                <label htmlFor="password" className="form-label">Password</label>
+                <label htmlFor="password " className="form-label"></label>
                 <input type="password" className="form-control" id="password" placeholder="password"
                 value = {password} onChange = { e => setPassword(e.target.value)}/>
             </div> 
-            {isLogin? <button onClick={loginBtn}>Login</button>
-            : <button onClick={registerBtn}>Register</button>
+            {isLogin? <button onClick={loginBtn} className = 'logbtn'>Login</button>
+            : <button className = 'logbtn' onClick={registerBtn}>Register</button>
             }
-
-            <br/>
             <div>
-                {isLogin? <h5>If you dont have account, please <button onClick={() => setLogin(false)}>Register</button> here</h5>
-                : <h5>If you have account, please <button onClick={() => setLogin(true)}>Login</button> here</h5>
+                {isLogin? <h5><button className = 'logredir' onClick={() => setLogin(false)}>Register Here</button></h5>
+                : <h5><button className = 'logredir' onClick={() => setLogin(true)}>Return to Login</button></h5>
                 }
             </div> 
         </div>
