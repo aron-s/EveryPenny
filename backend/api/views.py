@@ -21,6 +21,40 @@ def myprofile(request):
     }
     return Response(content)
 
+@api_view(['POST'])
+def validate(request):
+    if request.method == "POST":   
+        username = request.POST["username"]
+        password = request.POST.get("password")
+        try:
+            e = User.objects.get(username = username)
+            return Response({'error': 'email already exists!'})
+        except User.DoesNotExist:
+            content = {
+                'email2': username,
+                'password2': password
+            }
+
+        return Response(content)
+
+def validateEmail( email ):
+    from django.core.validators import validate_email
+    from django.core.exceptions import ValidationError
+    try:
+        validate_email( email )
+        return  'true'
+    except ValidationError:
+        return 'false'
+    
+def validatePassword( password ):
+    if password == None:
+        return 'false'
+
+    if len(password) >= 8 and len(password) <= 24:
+        return  'true'
+    else:
+        return 'false'
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

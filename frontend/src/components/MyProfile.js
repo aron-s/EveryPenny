@@ -5,7 +5,7 @@ import {useNavigate} from 'react-router-dom';
 
 function MyProfile() {
 
-    const [token, setToken] = useCookies(['mytoken'])
+    const [token, setToken, removeToken] = useCookies(['mytoken'])
 
     let navigate = useNavigate()
 
@@ -14,11 +14,19 @@ function MyProfile() {
             alert('you are not logged in!')
             navigate("/")
         }
-    })
+    }, [token])
+
+    const logoutBtn = () => {
+        removeToken(['mytoken'])
+        alert('logging out.')
+        navigate("/")
+    }
+
     return (
         <div>
            <h1>My profile</h1>
            <h2>Status: Logged in</h2>
+           <button onClick={logoutBtn}>Logout</button>
         </div>
     )
 }
