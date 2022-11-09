@@ -14,7 +14,7 @@ from rest_framework import permissions
 # Create your views here.
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated]) #not being used currently
 def myprofile(request):
     content = {
         'status': 'Successfully Logged In!'
