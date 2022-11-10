@@ -22,47 +22,55 @@ function Login() {
     }, [token])
 
     const loginBtn = () => {
-        let validationFailed = false
-        APIService.ValidateCredentials({username}, {password})
+        // let validationFailed = false
+        // APIService.ValidateCredentials({username, password})
+        // .then(resp => {
+        //     console.log(resp)
+        //     if(resp.error){
+        //         alert('Email already exists!')
+        //         validationFailed = true
+        //     } else {
+        //         var errors = 'Errors found.'
+        //         if(!resp.email){
+        //             errors.concat(' Username is not an email.')
+        //             validationFailed = true
+        //         }
+        //         if(!resp.password){
+        //             errors.concat(' Password needs to be between 8-24 characters.')
+        //             validationFailed = true
+        //         }
+        //         alert(errors)
+        //     }
+        // })
+        // .catch(error => console.log(error))  
+
+        // if(!validationFailed) {
+        APIService.LoginUser({username, password})
         .then(resp => {
-            console.log(resp)
-            if(resp.error){
-                alert('Email already exists!')
-                validationFailed = true
+            if(resp.token){
+                setToken('mytoken', resp.token)
             } else {
-                var errors = 'Errors found.'
-                if(!resp.email){
-                    errors.concat(' Username is not an email.')
-                    validationFailed = true
-                }
-                if(!resp.password){
-                    errors.concat(' Password needs to be between 8-24 characters.')
-                    validationFailed = true
-                }
-                alert(errors)
+                alert('Invalid Credentials try again!')
             }
         })
-        .catch(error => console.log(error))  
-
-        if(!validationFailed) {
-            APIService.LoginUser({username, password})
-            .then(resp => {
-                if(resp.token){
-                    setToken('mytoken', resp.token)
-                } else {
-                    alert('Invalid Credentials try again!')
-                }
-            })
-            .catch(error => console.log(error))    
-        }
+        .catch(error => console.log(error))    
+        // }
     }
     
 
     const registerBtn = () => {
         APIService.RegisterUser({username, password})
-        .then(() => {
-            alert('account created')
-            setLogin(true)
+        .then(resp => {
+            console.log(resp)
+            if(resp.id){
+                alert('Account created!')
+                setLogin(true)
+            } else if(resp.username) {
+                alert('Account already exists!')
+            } else {
+                alert('Try again, your data failed validation. Username = email and the password between 8 to 24 digits.')
+            }
+            
         })
         .catch(error => console.log(error))
     }
@@ -76,7 +84,7 @@ function Login() {
             
             <div>
                 <label htmlFor="username" className="form-label"></label>
-                <input type="text" className="form-control" id="username" placeholder="username"
+                <input type="text" className="form-control" id="username" placeholder="email"
                 value = {username} onChange = { e => setUsername(e.target.value)}/>
             </div>
             <div>
