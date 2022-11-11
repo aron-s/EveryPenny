@@ -11,20 +11,20 @@ services:
         - POSTGRES_PASSWORD=postgres
 
   backend:
-    image: jihxdul/everypenny-backend
+    image: jihadul/everypenny-backend
     volumes:
       - ./backend:/app
 
   
   frontend:
-    image: jihxdul/everypenny-frontend
+    image: jihadul/everypenny-frontend
     volumes:
       - ./frontend:/app
     ports:
       - 80:80
   
   nginx_backend_server:
-    image: jihxdul/everypenny-nginx
+    image: jihadul/everypenny-nginx
     ports:
         - 8000:8000
 
