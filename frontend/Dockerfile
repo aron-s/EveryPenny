@@ -14,5 +14,6 @@ RUN apk --no-cache add curl
 #     chmod +x envsubst && \
 #     mv envsubst /usr/local/bin
 COPY ./nginx.config /etc/nginx/conf.d/default.conf
+EXPOSE 443
 CMD ["/bin/sh", "-c", "nginx -g 'daemon off;'"]
 COPY --from=builder /opt/web/build /usr/share/nginx/html
