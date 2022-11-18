@@ -1,6 +1,7 @@
 export default class APIService {
     static LoginUser(body) {
-        return fetch('http://127.0.0.1:8000/auth/', {
+        const api = process.env.REACT_APP_BACKEND_URL.concat('auth/');
+        return fetch(api, {
             'method': 'POST', 
             headers : {
                 'Content-Type': 'application/json',
@@ -11,7 +12,8 @@ export default class APIService {
     }
 
     static RegisterUser(body) {
-        return fetch('http://127.0.0.1:8000/api/users/', {
+        const api = process.env.REACT_APP_BACKEND_URL.concat('api/users/');
+        return fetch(api, {
             'method': 'POST', 
             headers : {
                 'Content-Type': 'application/json',
@@ -21,32 +23,32 @@ export default class APIService {
         }).then(resp => resp.json())
     }
 
-    static ValidateCredentials(body) {
+    // static ValidateCredentials(body) {
         
-        // const data = new FormData()
-        // data.append('username', username)
-        // data.append('password', password)
-        // console.log(data)
-        // console.log('test')
-        return fetch('http://127.0.0.1:8000/api/validate/', {
-            'method': 'POST', 
-            headers : {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body)
+    //     // const data = new FormData()
+    //     // data.append('username', username)
+    //     // data.append('password', password)
+    //     // console.log(data)
+    //     // console.log('test')
+    //     return fetch('http://127.0.0.1:8000/api/validate/', {
+    //         'method': 'POST', 
+    //         headers : {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(body)
             
-        }).then(resp => resp.json())
-    }
+    //     }).then(resp => resp.json())
+    // }
 
-    static GetMyProfileInfo(body, token) {
-        return fetch('http://127.0.0.1:8000/api/myprofile/', {
-            'method': 'GET', 
-            headers : {
-                'Content-Type': 'application/json',
-                'Authorization': `Token ${token['mytoken']}`
-            },
-            body: JSON.stringify(body)
+    // static GetMyProfileInfo(body, token) {
+    //     return fetch('http://127.0.0.1:8000/api/myprofile/', {
+    //         'method': 'GET', 
+    //         headers : {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': `Token ${token['mytoken']}`
+    //         },
+    //         body: JSON.stringify(body)
             
-        }).then(resp => resp.json())
-    }
+    //     }).then(resp => resp.json())
+    // }
 }

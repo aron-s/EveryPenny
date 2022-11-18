@@ -22,6 +22,9 @@ function Login() {
     }, [token])
 
     const loginBtn = () => {
+        // console.log('test')
+        // console.log(process.env.REACT_APP_BACKEND_URL)
+        // console.log('test2')
         // let validationFailed = false
         // APIService.ValidateCredentials({username, password})
         // .then(resp => {

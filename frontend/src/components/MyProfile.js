@@ -1,5 +1,4 @@
-import React, {useState, useEffect} from 'react';
-import APIService from '../APIService';
+import React, {useEffect} from 'react';
 import {useCookies} from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
 import './myStyles.css';
