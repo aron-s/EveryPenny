@@ -9,6 +9,8 @@ import {CookiesProvider} from 'react-cookie'
 import MyProfile from './components/MyProfile';
 import './components/Login'
 import './components/MyProfile'
+import "bootstrap/dist/css/bootstrap.min.css"
+
 
 
 function Router() {

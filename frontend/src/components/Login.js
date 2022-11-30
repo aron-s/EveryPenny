@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react';
 import APIService from '../APIService';
 import {useCookies} from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
-import './myStyles.css';
 import logo from './images/everypennylogo.png';
+import {Button} from "react-bootstrap"
+import Container from "react-bootstrap/Container"
+import './myStyles.css';
 
 
 function Login() {
@@ -22,32 +24,6 @@ function Login() {
     }, [token])
 
     const loginBtn = () => {
-        // console.log('test')
-        // console.log(process.env.REACT_APP_BACKEND_URL)
-        // console.log('test2')
-        // let validationFailed = false
-        // APIService.ValidateCredentials({username, password})
-        // .then(resp => {
-        //     console.log(resp)
-        //     if(resp.error){
-        //         alert('Email already exists!')
-        //         validationFailed = true
-        //     } else {
-        //         var errors = 'Errors found.'
-        //         if(!resp.email){
-        //             errors.concat(' Username is not an email.')
-        //             validationFailed = true
-        //         }
-        //         if(!resp.password){
-        //             errors.concat(' Password needs to be between 8-24 characters.')
-        //             validationFailed = true
-        //         }
-        //         alert(errors)
-        //     }
-        // })
-        // .catch(error => console.log(error))  
-
-        // if(!validationFailed) {
         APIService.LoginUser({username, password})
         .then(resp => {
             if(resp.token){
@@ -79,31 +55,32 @@ function Login() {
     }
 
     return (
-        <div>
-            <h1 className='welcome'>Welcome to Every Penny!</h1>
-            <img className = 'logo'src={logo} alt="logo"/>
-            <h2 className = 'reqlog'>Please {isLogin ? "Login" : "Register"}</h2>
-            
-            
-            <div>
-                <label htmlFor="username" className="form-label"></label>
-                <input type="text" className="form-control" id="username" placeholder="email"
-                value = {username} onChange = { e => setUsername(e.target.value)}/>
+        <Container>
+            <div className='test'>
+                <div  ><h1>Welcome to Every Penny!</h1></div>
+                <div  ><img src={logo} alt="logo" class="img-fluid  w-25"/></div>
+                <div  ><h2 className = 'reqlog'>Please {isLogin ? "Login" : "Register"}</h2></div>
+                
+                <div class="form-outline mb-4" >
+                    <label htmlFor="username" className="form-label col-xs-4"></label>
+                    <input type="text" className="form-control" id="username" placeholder="email"
+                    value = {username} onChange = { e => setUsername(e.target.value)}/>
+                    
+                    <label htmlFor="password " className="form-label"></label>
+                    <input type="password" className="form-control" id="password" placeholder="password"
+                    value = {password} onChange = { e => setPassword(e.target.value)}/>
+                </div> 
+                <div className="p-3 d-grid gap-2">
+                    {isLogin? <Button variant = "success" onClick={loginBtn}>Login</Button>
+                    : <Button  variant = "success" onClick={registerBtn}>Register</Button>
+                    }
+                    
+                    {isLogin? <h5><Button variant = "primary"  onClick={() => setLogin(false)}>Register Here</Button></h5>
+                    : <h5><Button  variant = "primary" onClick={() => setLogin(true)}>Return to Login</Button></h5>
+                    }   
+                </div> 
             </div>
-            <div>
-                <label htmlFor="password " className="form-label"></label>
-                <input type="password" className="form-control" id="password" placeholder="password"
-                value = {password} onChange = { e => setPassword(e.target.value)}/>
-            </div> 
-            {isLogin? <button onClick={loginBtn} className = 'logbtn'>Login</button>
-            : <button className = 'logbtn' onClick={registerBtn}>Register</button>
-            }
-            <div>
-                {isLogin? <h5><button className = 'logredir' onClick={() => setLogin(false)}>Register Here</button></h5>
-                : <h5><button className = 'logredir' onClick={() => setLogin(true)}>Return to Login</button></h5>
-                }
-            </div> 
-        </div>
+        </Container>
     )
 }
 
