@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect ,useState} from 'react';
 import {useCookies} from 'react-cookie';
 import {useNavigate} from 'react-router-dom';
 // import logo from './images/everypennylogo.png';
@@ -7,12 +7,22 @@ import { Button, Stack } from 'react-bootstrap';
 import BudgetCard from './BudgetCard';
 
 import './myStyles.css';
+import AddBudgetModal from './Addbugets';
+import AddExpenseModal from './addexpense';
 
 
 
 function MyProfile() {
+    const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
+    const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
+
+    
 
     const [token, setToken, removeToken] = useCookies(['mytoken'])
+
+    function openAddExpenseModal(){
+        setShowAddExpenseModal(true)
+    }
 
     let navigate = useNavigate()
 
@@ -30,12 +40,13 @@ function MyProfile() {
     }
 
     return (
+        <>
         <Container className='my-4'>
             <Stack direction='horizontal' gap ='2' className='mb-4'>
                 <Button variant = 'danger' className = 'logout' onClick={logoutBtn}>Logout</Button>
                 <h1 className="me-auto heading">Budgets</h1>
-                <Button variant='primary' className='newbud'>New Budget</Button>
-                <Button variant='outline-primary' className='addexp'>Add Expense</Button>
+                <Button variant='primary' onClick={setShowAddBudgetModal} className='newbud'>New Budget</Button>
+                <Button variant='outline-primary' onClick={setShowAddExpenseModal} className='addexp'>Add Expense</Button>
             </Stack>
             <div
                 style={{
@@ -45,15 +56,16 @@ function MyProfile() {
                     alignItems: "flex-start",
                 }}
             >
-                <BudgetCard name = "TestBudget" amount ={100} max = {1000}></BudgetCard> 
+                <BudgetCard name = "TestBudget" gray amount ={9999} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}></BudgetCard> 
             </div>
-
-            
-
-            
-
-
         </Container>
+        <AddBudgetModal show={showAddBudgetModal}
+        handleClose={() => setShowAddBudgetModal(false)}/>
+
+         <AddExpenseModal show={showAddExpenseModal}
+        handleClose={() => setShowAddExpenseModal(false)}
+        />
+        </>
 
     )
 }

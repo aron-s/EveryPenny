@@ -10,12 +10,12 @@ import MyProfile from './components/MyProfile';
 import './components/Login'
 import './components/MyProfile'
 import "bootstrap/dist/css/bootstrap.min.css"
-
+import { BudgetsProvider } from './components/budgetcontext';
 
 
 function Router() {
   return (
-    
+    <BudgetsProvider>
     <CookiesProvider>
       <BrowserRouter>
       <Routes>
@@ -25,6 +25,7 @@ function Router() {
       </Routes>
       </BrowserRouter>
     </CookiesProvider>
+    </BudgetsProvider>
   )
 }
 
