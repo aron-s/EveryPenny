@@ -1,2 +1,5 @@
 /backup_data/
 .DS_Store
+/backend/expenses/__pycache__/
+/backend/expenses/migrations/__pycache__/
+/backend/.env
