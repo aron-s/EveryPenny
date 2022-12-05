@@ -45,7 +45,9 @@ function Login() {
                 alert('Account created!')
                 setLogin(true)
             } else if(resp.error) {
-                alert(resp.error)
+                alert(resp.error[0])
+            } else if(resp.username) {
+                alert(resp.username[0])
             }
         })
         .catch(error => console.log(error))
