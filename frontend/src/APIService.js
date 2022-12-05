@@ -12,7 +12,7 @@ export default class APIService {
     }
 
     static RegisterUser(body) {
-        const api = process.env.REACT_APP_BACKEND_URL.concat('api/users/');
+        const api = process.env.REACT_APP_BACKEND_URL.concat('register/');
         return fetch(api, {
             'method': 'POST', 
             headers : {

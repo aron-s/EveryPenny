@@ -44,12 +44,9 @@ function Login() {
             if(resp.id){
                 alert('Account created!')
                 setLogin(true)
-            } else if(resp.username) {
-                alert('Account already exists!')
-            } else {
-                alert('Try again, your data failed validation. Username = email and the password between 8 to 24 digits.')
+            } else if(resp.error) {
+                alert(resp.error)
             }
-            
         })
         .catch(error => console.log(error))
     }

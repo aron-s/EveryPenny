@@ -37,17 +37,14 @@ class UserSerializer(serializers.ModelSerializer):
                 return False
 
         if username_qs.exists():
-            raise serializers.ValidationError('Duplicate username.')
+            raise serializers.ValidationError({'error': ('Email is already in use!')})
         elif not validateEmail(username):
-            raise serializers.ValidationError('Username is not an email.')
+            raise serializers.ValidationError({'error': ('Username is not an email!')})
         elif not validatePassword(data.get("password")):
-            raise serializers.ValidationError('Password needs to be between 8 to 24 chars.')
+            raise serializers.ValidationError({'error': ('Password should be between 8-24 characters!')})
         else:
             pass
         return value
-
-        
-
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)

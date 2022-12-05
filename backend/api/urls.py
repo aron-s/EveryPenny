@@ -1,16 +1,18 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import UserViewSet, myprofile, validate, LoginView
+# from .views import UserViewSet, myprofile, validate 
+from .views import LoginView, RegisterView
 from rest_framework.routers import DefaultRouter
 
-
+'''
 router = DefaultRouter()
 router.register('users', UserViewSet)
-
+'''
 
 urlpatterns = [
-    path('api/', include(router.urls)),
-    path('api/myprofile/', myprofile),
-    path('api/validate/', validate),
-    path('auth/', LoginView.as_view(), name="login")
+    #path('api/', include(router.urls)),
+    #path('api/myprofile/', myprofile),
+    #path('api/validate/', validate),
+    path('auth/', LoginView.as_view(), name="login"),
+    path("register/", RegisterView.as_view(), name="register"),
 ]

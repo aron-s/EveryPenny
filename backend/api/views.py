@@ -17,7 +17,7 @@ import jwt
 
 
 # Create your views here.
-
+'''
 @api_view(['GET'])
 @permission_classes([IsAuthenticated]) #not being used currently
 def myprofile(request):
@@ -42,10 +42,23 @@ def validate(request):
 
         return Response(content)
 
-
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+'''
+
+class RegisterView(GenericAPIView):
+    serializer_class = UserSerializer
+
+    def post(self, request):
+        serializer = UserSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(GenericAPIView):
@@ -58,9 +71,7 @@ class LoginView(GenericAPIView):
         user = auth.authenticate(username=username, password=password)
 
         if user:
-            auth_token = jwt.encode(
-                {"username": user.username}, settings.JWT_SECRET_KEY, algorithm="HS256"
-            )
+            auth_token = jwt.encode({"username": user.username}, settings.JWT_SECRET_KEY, algorithm="HS256")
             serializer = UserSerializer(user)
             data = {'user': serializer.data, 'token':auth_token}
             return Response(data, status=status.HTTP_200_OK)
