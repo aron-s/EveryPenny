@@ -8,6 +8,7 @@ from rest_framework import response
 from django.db.models import Sum
 
 
+# create or save an expense
 class ExpenseListAPIView(ListCreateAPIView):
     serializer_class = ExpenseSerializer
     queryset = Expense.objects.all()
@@ -17,8 +18,9 @@ class ExpenseListAPIView(ListCreateAPIView):
         return serializer.save(owner=self.request.user)
 
     def get_queryset(self):
-        return super().queryset.filter(owner=self.request.user)
+        return self.queryset.filter(owner=self.request.user)
 
+# Creates a view that allows users to retrieve, update and delete an expense
 class ExpenseDetailAPIView(RetrieveUpdateDestroyAPIView):
     serializer_class = ExpenseSerializer
     permission_classes = (permissions.IsAuthenticated,)
@@ -26,7 +28,7 @@ class ExpenseDetailAPIView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'id'
 
     def get_queryset(self):
-        return super().queryset.filter(owner=self.request.user)
+        return self.queryset.filter(owner=self.request.user)
 
 class TotalExpenseStatus(APIView):
     def get(self,request):
