@@ -16,10 +16,28 @@ import APIService from '../APIService';
 function MyProfile() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
     const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
-
     
 
     const [token, setToken, removeToken] = useCookies(['mytoken'])
+
+    // start getExpenses
+
+    const [expenses, setExpenses] = useState([]);
+    useEffect(() => {
+        fetchExpenses();
+      }, []);
+    const fetchExpenses = () => {
+        APIService.GetExpensesUser(token['mytoken'])
+        .then((res) => {
+            console.log(res);
+            setExpenses(res);
+          })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+
+    // end getExpense
 
     function openAddExpenseModal(){
         setShowAddExpenseModal(true)
@@ -40,7 +58,7 @@ function MyProfile() {
         navigate("/")
     }
 
-    const expenses = APIService.GetExpensesUser(token['mytoken']);
+    // const expenses = APIService.GetExpensesUser(token['mytoken']);
 
     var result = (
         <>
@@ -66,6 +84,11 @@ function MyProfile() {
                 <BudgetCard name = "expense.Category" gray amount ={expense} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}></BudgetCard> 
             };
             </script> */}
+            {expenses?.map((expense) => (
+            <div className='card'>
+                <BudgetCard name = {expense.category} gray amount ={expense.amount} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}/>
+            </div>
+            ))}
             
 
                
@@ -82,12 +105,12 @@ function MyProfile() {
     )
 
     // var budgetContainer = document.getElementById("bugdetContainer");
-    console.log(expenses);
-    for (let i = 0; i < expenses.length; i++) {
-        var expense = expenses[i];
-        console.log(expense);
-       // budgetContainer.appendChild("<BudgetCard name = "expense.Category" gray amount ={expense} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}/> ");
-    };
+    // console.log(expenses);
+    // for (let i = 0; i < expenses.length; i++) {
+    //     var expense = expenses[i];
+    //     console.log(expense);
+    //    // budgetContainer.appendChild("<BudgetCard name = "expense.Category" gray amount ={expense} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}/> ");
+    // };
 
 
     return result;
