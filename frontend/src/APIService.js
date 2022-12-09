@@ -23,6 +23,17 @@ export default class APIService {
         }).then(resp => resp.json())
     }
 
+    static GetExpensesUser(token) {
+        const api = process.env.REACT_APP_BACKEND_URL.concat('expenses/');
+        return fetch(api, {
+            'method': 'GET', 
+            headers : {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        }).then(resp => resp.json())
+    }
+
     // static ValidateCredentials(body) {
         
     //     // const data = new FormData()

@@ -9,6 +9,7 @@ import BudgetCard from './BudgetCard';
 import './myStyles.css';
 import AddBudgetModal from './Addbugets';
 import AddExpenseModal from './addexpense';
+import APIService from '../APIService';
 
 
 
@@ -39,7 +40,9 @@ function MyProfile() {
         navigate("/")
     }
 
-    return (
+    const expenses = APIService.GetExpensesUser(token['mytoken']);
+
+    var result = (
         <>
         <Container className='my-4'>
             <Stack direction='horizontal' gap ='2' className='mb-4'>
@@ -55,8 +58,17 @@ function MyProfile() {
                     gap: "1rem",
                     alignItems: "flex-start",
                 }}
+                id="bugdetContainer"
             >
-                <BudgetCard name = "TestBudget" gray amount ={9999} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}></BudgetCard> 
+            {/* <script>
+            for (let i = 0; i < expenses.length; i++) {
+                expense = expenses[i];
+                <BudgetCard name = "expense.Category" gray amount ={expense} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}></BudgetCard> 
+            };
+            </script> */}
+            
+
+               
             </div>
         </Container>
         <AddBudgetModal show={showAddBudgetModal}
@@ -68,6 +80,17 @@ function MyProfile() {
         </>
 
     )
+
+    // var budgetContainer = document.getElementById("bugdetContainer");
+    console.log(expenses);
+    for (let i = 0; i < expenses.length; i++) {
+        var expense = expenses[i];
+        console.log(expense);
+       // budgetContainer.appendChild("<BudgetCard name = "expense.Category" gray amount ={expense} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}/> ");
+    };
+
+
+    return result;
 }
 
 export default MyProfile
