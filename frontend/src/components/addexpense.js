@@ -1,14 +1,27 @@
-import { Form, Modal, Button } from "react-bootstrap"
+import { Form, Modal, Button } from "react-bootstrap";
+import APIService from '../APIService';
+import {useCookies} from 'react-cookie';
 
 
-export default function AddExpenseModal({ show, handleClose }) {
-  function handleSubmit(e) {
+export default function AddExpenseModal({ show, handleClose, category }) {
+  const [token] = useCookies(['mytoken'])
+  console.log("AddExpenseModal was called.");
 
-  }
+  const handleSubmit2 = (amount, description, category) => {
+    APIService.CreateExpense({amount, description, category}, token['mytoken'])
+    .then((res) => {
+      if(!res.id){
+        alert("Unable to create. Error!");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  };
 
   return (
     <Modal show={show} onHide={handleClose}>
-      <Form onSubmit={handleSubmit}>
+      <Form>
         <Modal.Header closeButton>
           <Modal.Title>Add Expense</Modal.Title>
         </Modal.Header>
@@ -30,13 +43,13 @@ export default function AddExpenseModal({ show, handleClose }) {
           <Form.Group className="mb-3" controlId="budgetID">
             <Form.Label>Select Which Budget</Form.Label>
             <Form.Select
-              defaultValue="N/a"
+              defaultValue={category}
               >
 
             </Form.Select>
           </Form.Group>
           <div className="d-flex justify-content-end">
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" onClick={() =>handleSubmit2("500", "description testing", "ONLINE_SERVICES")}>
               Add
             </Button>
           </div>

@@ -16,7 +16,7 @@ import APIService from '../APIService';
 function MyProfile() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
     const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
-    
+    console.log("My profile was called.")
 
     const [token, setToken, removeToken] = useCookies(['mytoken'])
 
