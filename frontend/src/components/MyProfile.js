@@ -25,15 +25,15 @@ function MyProfile() {
 
     // start getExpenses
 
-    const [expenses, setExpenses] = useState([]);
+    const [budgets, setBudgets] = useState([]);
     useEffect(() => {
-        fetchExpenses();
+        fetchBudget();
       }, []);
-    const fetchExpenses = () => {
-        APIService.GetExpensesUser(token['mytoken'])
+    const fetchBudget = () => {
+        APIService.GetBudgetUser(token['mytoken'])
         .then((res) => {
             console.log(res);
-            setExpenses(res);
+            setBudgets(res);
           })
         .catch((err) => {
             console.log(err);
@@ -88,13 +88,13 @@ function MyProfile() {
             };
             </script> */}
             <Stack>
-            {expenses?.map((expense) => (
+            {budgets?.map((budget) => (
             <div className='card'>
                 <BudgetCard 
-                name = {expense.category} 
+                name = {budget.category} 
                 gray 
-                amount ={expense.amount} 
-                max = {1000} 
+                amount ={0} 
+                max = {budget.max_amount} 
                 onAddExpenseClick = {() => openAddExpenseModal()}
                 onViewExpenseClick = {() => setShowviewexpensesModal(showviewexpensesModal)}
                 
