@@ -27,7 +27,7 @@ export default function AddExpenseModal({ show, handleClose, category }) {
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="Description">
-            <Form.Label>Description</Form.Label>
+            <Form.Label>Note</Form.Label>
             <Form.Control type="text" required />
           </Form.Group>
           <Form.Group className="mb-3" controlId="Amount">
@@ -39,14 +39,6 @@ export default function AddExpenseModal({ show, handleClose, category }) {
               min={0}
               step={0.01}
             />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="budgetID">
-            <Form.Label>Select Which Budget</Form.Label>
-            <Form.Select
-              defaultValue={category}
-              >
-
-            </Form.Select>
           </Form.Group>
           <div className="d-flex justify-content-end">
             <Button variant="primary" type="submit" onClick={() =>handleSubmit2("500", "description testing", "ONLINE_SERVICES")}>

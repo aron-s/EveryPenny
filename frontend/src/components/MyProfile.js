@@ -9,13 +9,16 @@ import BudgetCard from './BudgetCard';
 import './myStyles.css';
 import AddBudgetModal from './Addbugets';
 import AddExpenseModal from './addexpense';
+import viewexpensesModal from './viewexpenses';
 import APIService from '../APIService';
 
 
 
 function MyProfile() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
-    const [showAddExpenseModal, setShowAddExpenseModal] = useState(false)
+    const [showviewexpensesModal, setShowviewexpensesModal] = useState(false)
+
+    const [showAddExpenseModal, setShowAddExpenseModal] = useState()
     console.log("My profile was called.")
 
     const [token, setToken, removeToken] = useCookies(['mytoken'])
@@ -67,7 +70,7 @@ function MyProfile() {
                 <Button variant = 'danger' className = 'logout' onClick={logoutBtn}>Logout</Button>
                 <h1 className="me-auto heading">Budgets</h1>
                 <Button variant='primary' onClick={setShowAddBudgetModal} className='newbud'>New Budget</Button>
-                <Button variant='outline-primary' onClick={setShowAddExpenseModal} className='addexp'>Add Expense</Button>
+                
             </Stack>
             <div
                 style={{
@@ -84,11 +87,22 @@ function MyProfile() {
                 <BudgetCard name = "expense.Category" gray amount ={expense} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}></BudgetCard> 
             };
             </script> */}
+            <Stack>
             {expenses?.map((expense) => (
             <div className='card'>
-                <BudgetCard name = {expense.category} gray amount ={expense.amount} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}/>
+                <BudgetCard 
+                name = {expense.category} 
+                gray 
+                amount ={expense.amount} 
+                max = {1000} 
+                onAddExpenseClick = {() => openAddExpenseModal()}
+                onViewExpenseClick = {() => setShowviewexpensesModal(showviewexpensesModal)}
+                
+                />
             </div>
             ))}
+            </Stack>
+            
             
 
                
@@ -100,18 +114,14 @@ function MyProfile() {
          <AddExpenseModal show={showAddExpenseModal}
         handleClose={() => setShowAddExpenseModal(false)}
         />
+
+        <viewExpensesModal 
+        show={showviewexpensesModal}
+        handleClose={() => setShowviewexpensesModal()}
+        />
         </>
 
     )
-
-    // var budgetContainer = document.getElementById("bugdetContainer");
-    // console.log(expenses);
-    // for (let i = 0; i < expenses.length; i++) {
-    //     var expense = expenses[i];
-    //     console.log(expense);
-    //    // budgetContainer.appendChild("<BudgetCard name = "expense.Category" gray amount ={expense} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}/> ");
-    // };
-
 
     return result;
 }
