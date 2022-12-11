@@ -16,9 +16,10 @@ import APIService from '../APIService';
 
 function MyProfile() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
-    const [showviewexpensesModal, setShowviewexpensesModal] = useState(false)
+    const [showviewexpensesModal, setShowviewexpensesModal] = useState('')
 
-    const [showAddExpenseModal, setShowAddExpenseModal] = useState()
+    const [showAddExpenseModal, setShowAddExpenseModal] = useState('')
+ 
     console.log("My profile was called.")
 
     const [token, setToken, removeToken] = useCookies(['mytoken'])
@@ -42,8 +43,9 @@ function MyProfile() {
 
     // end getExpense
 
-    function openAddExpenseModal(){
-        setShowAddExpenseModal(true)
+    function openAddExpenseModal(category){
+        console.log("input is " + category);
+        setShowAddExpenseModal(category);
     }
 
     let navigate = useNavigate()
@@ -91,11 +93,11 @@ function MyProfile() {
             {budgets?.map((budget) => (
             <div className='card'>
                 <BudgetCard 
-                name = {budget.category} 
+                category = {budget.category} 
                 gray 
                 amount ={0} 
                 max = {budget.max_amount} 
-                onAddExpenseClick = {() => openAddExpenseModal()}
+                onAddExpenseClick = {() => openAddExpenseModal(budget.category)}
                 onViewExpenseClick = {() => setShowviewexpensesModal(showviewexpensesModal)}
                 
                 />
@@ -112,7 +114,7 @@ function MyProfile() {
         handleClose={() => setShowAddBudgetModal(false)}/>
 
          <AddExpenseModal show={showAddExpenseModal}
-        handleClose={() => setShowAddExpenseModal(false)}
+        handleClose={() => setShowAddExpenseModal('')}
         />
 
         <viewExpensesModal 

@@ -1,13 +1,18 @@
 import { Form, Modal, Button } from "react-bootstrap";
 import APIService from '../APIService';
 import {useCookies} from 'react-cookie';
+import { useState } from "react";
 
 
-export default function AddExpenseModal({ show, handleClose, category }) {
+export default function AddExpenseModal({ show, handleClose}) {
+  
+  const category = show;
   const [token] = useCookies(['mytoken'])
-  console.log("AddExpenseModal was called.");
+  const [amount, setAmount] = useState('');
+  const [description, setDescription] = useState('');
 
-  const handleSubmit2 = (amount, description, category) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     APIService.CreateExpense({amount, description, category}, token['mytoken'])
     .then((res) => {
       if(!res.id){
@@ -21,14 +26,17 @@ export default function AddExpenseModal({ show, handleClose, category }) {
 
   return (
     <Modal show={show} onHide={handleClose}>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>Add Expense</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form.Group className="mb-3" controlId="Description">
-            <Form.Label>Note</Form.Label>
-            <Form.Control type="text" required />
+            <Form.Label>Description</Form.Label>
+            <Form.Control type="text" required 
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="Amount">
             <Form.Label>Expense Amount</Form.Label>
@@ -38,10 +46,12 @@ export default function AddExpenseModal({ show, handleClose, category }) {
               required
               min={0}
               step={0.01}
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
             />
           </Form.Group>
           <div className="d-flex justify-content-end">
-            <Button variant="primary" type="submit" onClick={() =>handleSubmit2("500", "description testing", "ONLINE_SERVICES")}>
+            <Button variant="primary" type="submit">
               Add
             </Button>
           </div>

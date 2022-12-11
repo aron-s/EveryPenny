@@ -2,7 +2,7 @@ import {Button, Stack, Card, ProgressBar} from "react-bootstrap";
 import {currencyFormatter} from './utils'
 
 
-export default function BudgetCard({name,amount,max, gray, onAddExpenseClick, onViewExpenseClick}){
+export default function BudgetCard({category, amount,max, gray, onAddExpenseClick, onViewExpenseClick}){
     const classNames = []
   if (amount > max) {
     classNames.push("bg-danger", "bg-opacity-10")
@@ -14,7 +14,7 @@ export default function BudgetCard({name,amount,max, gray, onAddExpenseClick, on
         <Card className={classNames.join(" ")}>
             <Card.Body>
                 <Card.Title className="d-flex justify-content-between align-items-baseline fw-normal mb-3">
-                    <div className="me-2">{name}</div>
+                    <div className="me-2">{category}</div>
                     <div className="d-flex align-items-baseline">{currencyFormatter.format(amount)} 
                     <span className="text-muted fs-6 ms-1">/ {currencyFormatter.format(max)} </span>
                     </div>
@@ -27,7 +27,7 @@ export default function BudgetCard({name,amount,max, gray, onAddExpenseClick, on
                 now ={amount}
                 />
                 <Stack direction = "horizontal" gap = '3' className = "mt-4">
-                 <Button variant="outline-primary" onClick={onAddExpenseClick} className="ms-auto">Add Expense</Button>  
+                 <Button variant="outline-primary" onClick={onAddExpenseClick} className="ms-auto" category>Add Expense</Button>  
                  <Button variant="outline-secondary" onClick={onViewExpenseClick} className="">View Expenses</Button>  
                  <Button variant="outline-danger">Delete</Button>{' '}
 
