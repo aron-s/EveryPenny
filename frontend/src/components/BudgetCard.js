@@ -11,7 +11,7 @@ export default function BudgetCard({category, amount,max, gray, onAddExpenseClic
   }
 
     return(
-        <Card className={classNames.join(" ")}>
+        <Card mb-3 className={classNames.join(" ")}>
             <Card.Body>
                 <Card.Title className="d-flex justify-content-between align-items-baseline fw-normal mb-3">
                     <div className="me-2">{category}</div>
@@ -25,6 +25,7 @@ export default function BudgetCard({category, amount,max, gray, onAddExpenseClic
                 min = {0}
                 max ={max}
                 now ={amount}
+                
                 />
                 <Stack direction = "horizontal" gap = '3' className = "mt-4">
                  <Button variant="outline-primary" onClick={onAddExpenseClick} className="ms-auto" category>Add Expense</Button>  
@@ -33,10 +34,8 @@ export default function BudgetCard({category, amount,max, gray, onAddExpenseClic
 
                 </Stack>
 
-                
             </Card.Body>
         </Card>
-
     )
 }
 function getProgressBarVariant(amount, max) {

@@ -48,7 +48,7 @@ export default function AddBudgetModal({ show, handleClose }) {
             onChange={(e) => setCategory(e.target.value)}
             >
           <option value=''>Select</option>
-          <option value='ONLINE_SERVICES'>ONLINE_SERVICES</option>
+          <option value='ONLINE_SERVICES'>ONLINE SERVICES</option>
           <option value='TRAVEL'>TRAVEL</option>
           <option value='FOOD'>FOOD</option>
           <option value='RENT'>RENT</option>
