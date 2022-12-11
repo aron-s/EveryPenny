@@ -1,14 +1,31 @@
 import {Button, Stack, Card, ProgressBar} from "react-bootstrap";
 import {currencyFormatter} from './utils'
+import APIService from '../APIService';
+import {useCookies} from 'react-cookie';
 
 
-export default function BudgetCard({category, amount,max, gray, onAddExpenseClick, onViewExpenseClick}){
+
+
+export default function BudgetCard({id, category, amount,max, gray, onAddExpenseClick, onViewExpenseClick}){
     const classNames = []
   if (amount > max) {
     classNames.push("bg-danger", "bg-opacity-10")
   } else if (gray) {
     classNames.push("bg-light")
   }
+
+  const [token] = useCookies(['mytoken'])
+
+
+  const sendDeleteRequest = () => {
+    APIService.DeleteBudget(id, token["mytoken"])
+    .then(res => {
+          if(res == 204){
+            window.location.reload();
+          }
+        })
+        .catch(error => console.log(error));
+  } 
 
     return(
         <Card mb-3 className={classNames.join(" ")}>
@@ -30,7 +47,7 @@ export default function BudgetCard({category, amount,max, gray, onAddExpenseClic
                 <Stack direction = "horizontal" gap = '3' className = "mt-4">
                  <Button variant="outline-primary" onClick={onAddExpenseClick} className="ms-auto">Add Expense</Button>  
                  <Button variant="outline-secondary" onClick={onViewExpenseClick} className="">View Expenses</Button>  
-                 <Button variant="outline-danger">Delete</Button>{' '}
+                 <Button variant="outline-danger" onClick={() => sendDeleteRequest()}>Delete</Button>{' '}
 
                 </Stack>
 

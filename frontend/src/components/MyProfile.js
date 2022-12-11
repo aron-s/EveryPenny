@@ -41,6 +41,21 @@ function MyProfile() {
         });
     }
 
+    const [expenses, setExpenses] = useState([]);
+    useEffect(() => {
+        fetchExpenses();
+      }, []);
+    const fetchExpenses = async () => {
+        console.log("request sent");    
+        await APIService.GetExpensesUser(token['mytoken'])
+        .then((res) => {
+            setExpenses(res);
+          })
+        .catch((err) => {
+            console.log(err);
+        });
+    }
+
     // end getExpense
 
     function openAddExpenseModal(category){
@@ -63,7 +78,26 @@ function MyProfile() {
         navigate("/")
     }
 
-    // const expenses = APIService.GetExpensesUser(token['mytoken']);
+    const findSumOfCategory = (categ) => {
+        let result = 0;
+        for(let i= 0; i < expenses.length; i++){
+            if(expenses[i].category === categ){
+                result += parseInt(expenses[i].amount);
+            }
+        }
+        // expenses.forEach((expense) => {
+        //     if(expense.category === categ){
+        //         result += expense.amount;
+        //     }
+        // });
+        console.log(categ + " , " + result);
+        return result;
+    }
+
+    if (expenses === undefined) {
+        return <>Loading...</>;
+    }
+    
 
     var result = (
         <>
@@ -91,11 +125,12 @@ function MyProfile() {
             </script> */}
             <Stack>
             {budgets?.map((budget) => (
-            <div className='card'>
+            <div className='card' key ={budget.id}>
                 <BudgetCard 
+                id = {budget.id}
                 category = {budget.category} 
                 gray 
-                amount ={0} 
+                amount = {findSumOfCategory(budget.category)} 
                 max = {budget.max_amount} 
                 onAddExpenseClick = {() => openAddExpenseModal(budget.category)}
                 onViewExpenseClick = {() => setShowviewexpensesModal(showviewexpensesModal)}

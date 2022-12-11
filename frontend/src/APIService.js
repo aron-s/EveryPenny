@@ -68,8 +68,18 @@ export default class APIService {
                 'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(body)
-        
         }).then(resp => resp.json())
+    }
+
+    static DeleteBudget(id,token) {
+        const api = process.env.REACT_APP_BACKEND_URL.concat('expenses/budget/' + id + '/');
+        return fetch(api, {
+            'method': 'DELETE', 
+            headers : {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        }).then(resp => resp.status)
     }
 
     // static ValidateCredentials(body) {
