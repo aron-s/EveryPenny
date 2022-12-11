@@ -60,6 +60,6 @@ class BudgetDetailAPIView(RetrieveUpdateDestroyAPIView):
 
 class TotalBudgetStatus(APIView):
     def get(self,request):
-        expenses = Expense.objects.filter(owner=request.user)
-        total_amount = expenses.aggregate(Sum("max_amount"))
+        budget = Budget.objects.filter(owner=request.user)
+        total_amount = budget.aggregate(Sum("max_amount"))
         return response.Response(total_amount)

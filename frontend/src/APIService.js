@@ -59,6 +59,19 @@ export default class APIService {
         }).then(resp => resp.json())
     }
 
+    static CreateBudget(body,token) {
+        const api = process.env.REACT_APP_BACKEND_URL.concat('expenses/budget/');
+        return fetch(api, {
+            'method': 'POST', 
+            headers : {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(body)
+        
+        }).then(resp => resp.json())
+    }
+
     // static ValidateCredentials(body) {
         
     //     // const data = new FormData()
