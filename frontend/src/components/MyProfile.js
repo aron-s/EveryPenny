@@ -123,7 +123,7 @@ function MyProfile() {
                 <BudgetCard name = "expense.Category" gray amount ={expense} max = {1000} onAddExpenseClick = {() => openAddExpenseModal()}></BudgetCard> 
             };
             </script> */}
-            <Stack>
+            <Stack gap="3">
             {budgets?.map((budget) => (
             <div className='card' key ={budget.id}>
                 <BudgetCard 
