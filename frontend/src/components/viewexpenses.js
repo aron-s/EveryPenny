@@ -12,6 +12,7 @@ export default function ViewExpensesModal({ show, handleClose, expensesList }) {
                 if(expense.category === show){
                   return (
                   <div className='' key ={expense.id}>
+                    
                   <li>Description : {expense.description} , Amount: $ {expense.amount}</li>
                   </div>)
                 }
