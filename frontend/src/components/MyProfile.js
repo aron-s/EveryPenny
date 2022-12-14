@@ -9,14 +9,14 @@ import BudgetCard from './BudgetCard';
 import './myStyles.css';
 import AddBudgetModal from './Addbugets';
 import AddExpenseModal from './addexpense';
-import viewexpensesModal from './viewexpenses';
+import ViewExpensesModal from './viewexpenses';
 import APIService from '../APIService';
 
 
 
 function MyProfile() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false)
-    const [showviewexpensesModal, setShowviewexpensesModal] = useState('')
+    const [showViewExpensesModal, setShowViewExpensesModal] = useState('')
 
     const [showAddExpenseModal, setShowAddExpenseModal] = useState('')
  
@@ -61,6 +61,10 @@ function MyProfile() {
     function openAddExpenseModal(category){
         console.log("input is " + category);
         setShowAddExpenseModal(category);
+    }
+
+    function openViewExpenseModal(category){
+        setShowViewExpensesModal(category);
     }
 
     let navigate = useNavigate()
@@ -133,7 +137,7 @@ function MyProfile() {
                 amount = {findSumOfCategory(budget.category)} 
                 max = {budget.max_amount} 
                 onAddExpenseClick = {() => openAddExpenseModal(budget.category)}
-                onViewExpenseClick = {() => setShowviewexpensesModal(showviewexpensesModal)}
+                onViewExpenseClick = {() => openViewExpenseModal(budget.category)}
                 
                 />
             </div>
@@ -152,9 +156,10 @@ function MyProfile() {
         handleClose={() => setShowAddExpenseModal('')}
         />
 
-        <viewExpensesModal 
-        show={showviewexpensesModal}
-        handleClose={() => setShowviewexpensesModal()}
+        <ViewExpensesModal 
+        show={showViewExpensesModal}
+        handleClose={() => setShowViewExpensesModal('')}
+        expensesList = {expenses}
         />
         </>
 
