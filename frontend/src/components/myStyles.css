@@ -4,11 +4,17 @@
    align-items: center;
    text-align: center;
    margin-left: auto;
+   margin: auto;
+   width: 60%;
+   margin-left: 275px;
+   padding: 20px;
 }
 .logout{
     position: fixed;
     top: px;
     right:10px;
     width: 100px;
-    
 }
+
+
+

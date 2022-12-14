@@ -52,13 +52,14 @@ function Login() {
         })
         .catch(error => console.log(error))
     }
+    
 
     return (
-        <Container>
+        <Container className="con">
             <div className='test'>
-                <div  ><h1>Welcome to Every Penny!</h1></div>
-                <div  ><img src={logo} alt="logo" class="img-fluid  w-25"/></div>
-                <div  ><h2 className = 'reqlog'>Please {isLogin ? "Login" : "Register"}</h2></div>
+                <div className= "mb-4"><h1>Welcome to Every Penny!</h1></div>
+                <div class="rounded" ><img src={logo} alt="logo" class="img-fluid  w-25"/></div>
+                <div  ><h2 className = 'mt-4 reqlog'>Please {isLogin ? "Login" : "Register"}</h2></div>
                 
                 <div class="form-outline mb-4" >
                     <label htmlFor="username" className="form-label col-xs-4"></label>
